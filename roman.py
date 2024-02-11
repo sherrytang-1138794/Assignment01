@@ -114,6 +114,10 @@ def test_to_arabic():
 
 
 def test_invalid_roman():
+    """
+    When invalid characters are entered, to_arabic should
+    raise an ValueError.
+    """
     for s in ["A", "QC", "XBI"]:
         with pytest.raises(ValueError):
             print(f"trying: {s}")
@@ -121,6 +125,10 @@ def test_invalid_roman():
 
 
 def test_repeat_over_three_times():
+    """
+    In Roman Numeral rule, each numeral could only repeat up to 3 times.
+    to_arabic should raise an ValueError when this stuation happens.
+    """
     for s in ("MMMM", "DDDD", "CCCC", "LLLL", "XXXX", "VVVV", "IIII"):
         with pytest.raises(ValueError):
             print(f"trying: {s}")
@@ -128,6 +136,10 @@ def test_repeat_over_three_times():
 
 
 def test_invalid_order():
+    """
+    some order are invalid.
+    to_arabic should raise an ValueError under this circumstance.
+    """
     for s in ("CMC", "DM", "VX"):
         with pytest.raises(ValueError):
             print(f"trying: {s}")
@@ -135,6 +147,10 @@ def test_invalid_order():
 
 
 def test_repeat_pair():
+    """
+    pairs of roman numeral should not repeat. 
+    to_arabic should raise an ValueError under this circumstance.
+    """
     for s in ("CMCM", "CDCD", "XCXC", "XLXL", "IXIX", "IVIV"):
         with pytest.raises(ValueError):
             print(f"trying: {s}")
@@ -185,6 +201,7 @@ def valid_roman(s):
             if s[:1] == "I":  # 1
                 s = s[1:]
 
+    # if something left in s
     if s:
         return False
     else:
